@@ -10,7 +10,7 @@ const Intro = () => {
    /* From Uiverse.io by kennyotsu */ 
 <div className={style["card"]}>
   <div className={style["loader"]}>
-    <p>I am a </p>
+    <div className="text-wrap">  I am a </div>
     <div className={style["words"]}>
       <span className={style["word"]}>Devloper</span>
       <span className={style["word"]}>Programmer</span>

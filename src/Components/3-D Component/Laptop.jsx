@@ -22,13 +22,14 @@ function Laptop(props) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation-x={-0.425} position={[0, -0.04, 0.41]}>
-        <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
+        <group position={[0, 2.96, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <mesh material={materials.aluminium} geometry={nodes['Cube008'].geometry} />
           <mesh material={materials['matte.001']} geometry={nodes['Cube008_1'].geometry} />
           <mesh geometry={nodes['Cube008_2'].geometry}>
             <Html className="content" rotation-x={-Math.PI / 2} position={[0, 0.05, -0.09]} transform occlude>
               <div className="wrapper" onPointerDown={(e) => e.stopPropagation()}>
                 {/* <HeroPage /> */}
+                <img src='/iiitu.jpeg' alt='iiitu Logo'/>
               </div>
             </Html>
           </mesh>
@@ -47,4 +48,4 @@ function Laptop(props) {
 export default Laptop
 
 // Ensure you preload the model
-useGLTF.preload('/mac-draco.glb')
+useGLTF.preload('/mac-draco.glb') 
