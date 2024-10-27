@@ -26,8 +26,8 @@ function Laptop(props) {
           <mesh material={materials.aluminium} geometry={nodes['Cube008'].geometry} />
           <mesh material={materials['matte.001']} geometry={nodes['Cube008_1'].geometry} />
           <mesh geometry={nodes['Cube008_2'].geometry}>
-            <Html className="content" rotation-x={-Math.PI / 2} position={[0, 0.05, -0.09]} transform occlude>
-              <div className="wrapper" onPointerDown={(e) => e.stopPropagation()}>
+            <Html className="content" rotation-x={-Math.PI / 2} position={[0, 0.05, -0.06]} transform occlude>
+              <div className="w-full h-full bg-cover" onPointerDown={(e) => e.stopPropagation()}>
                 {/* <HeroPage /> */}
                 <img src='/iiitu.jpeg' alt='iiitu Logo'/>
               </div>

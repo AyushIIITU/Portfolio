@@ -3,8 +3,8 @@ import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react'
 import { DoubleSide } from 'three';
 
-function Scene() {
-    let tex=useTexture('/project-1.jpg');
+function Scene({Src}) {
+    let tex=useTexture(Src);
     tex.needsUpdate=true;
     let cyl=useRef(null);
     useFrame((state,delta)=>{
@@ -16,7 +16,7 @@ function Scene() {
     <>
     <group rotation={[0,1.4,0.5]}>
      <mesh  ref={cyl}>
-        <cylinderGeometry args={[1,1,1,30,30,true]}/>
+        <cylinderGeometry args={[3,3,3,30,30,true]}/>
         <meshBasicMaterial map={tex} transparent side={DoubleSide}/>
 
       </mesh>

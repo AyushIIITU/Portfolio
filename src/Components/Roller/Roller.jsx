@@ -6,14 +6,14 @@ import { OrbitControls } from '@react-three/drei'
 // import { DoubleSide } from 'three'
 import Scene from './Scene.jsx'
 
-function Roller() {
+function Roller({Src}) {
 
   return (
     <>
      <Canvas>
       <OrbitControls/>
       <ambientLight/>
-     <Scene/>
+     <Scene Src={Src}/>
      </Canvas>
     </>
   )
