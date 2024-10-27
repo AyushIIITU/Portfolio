@@ -1,0 +1,27 @@
+#thanos{
+    display:block;
+    width:100%;
+    text-wrap:wrap;
+    white-space:wrap;
+    
+  }
+  .disintegrate{  
+    font-size:1rem;
+    animation: anim5 calc(var(--duration)*10ms) linear forwards;
+        animation-delay:calc(var(--delay)*10ms); 
+  }
+  @keyframes anim5 {
+    
+    0%{
+      filter:blur(0px);
+    }
+    10%{
+      filter:blur(0px);
+      
+    }
+    100%{
+      filter:blur(500px);
+      display:none;
+    }
+  }
+  
