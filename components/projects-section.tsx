@@ -81,11 +81,11 @@ export function ProjectsSection() {
     ? projects 
     : projects.filter(project => project.category === activeTab);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
+    const containerVariants = {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: {
         staggerChildren: 0.1
       }
     }
@@ -215,15 +215,14 @@ export function ProjectsSection() {
 }
 
 interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  githubUrl: string;
-  liveUrl: string;
-}
-
+          id: string;
+          title: string;
+          description: string;
+          image: string;
+          tags: string[];
+          githubUrl: string;
+          liveUrl: string;
+        }
 function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: true, amount: 0.2 });

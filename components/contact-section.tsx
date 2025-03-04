@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { Card, CardContent } from "./ui/card";
 import { ContactForm } from "./contact-form";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
 export function ContactSection() {
@@ -117,5 +117,3 @@ export function ContactSection() {
     </section>
   );
 }
-
-export { ContactSection }
