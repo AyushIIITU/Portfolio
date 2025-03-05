@@ -215,7 +215,7 @@ export function ProjectsSection() {
 }
 
 interface Project {
-          id: string;
+          id: number;
           title: string;
           description: string;
           image: string;
