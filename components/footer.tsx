@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,7 +26,7 @@ export function Footer() {
             className="flex flex-col items-center gap-2 w-full"
           >
             <Link href="/" className="text-xl font-bold">
-              Portfolio
+              <Image src="/logo.png" alt="Logo" width={100} height={100} />
             </Link>
             <p className="text-center text-sm text-muted-foreground">
               Building exceptional digital experiences with code.
