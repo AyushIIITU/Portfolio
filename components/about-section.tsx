@@ -1,11 +1,10 @@
 "use client";
-
-import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Download } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 export function AboutSection() {
   const ref = useRef(null);
@@ -29,12 +28,13 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative h-80 w-full overflow-hidden rounded-lg md:h-auto md:w-1/2"
           >
-            <Image
-              src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?q=80&w=2070&auto=format&fit=crop"
-              alt="Developer working"
-              fill
-              className="object-cover"
-            />
+            <DotLottieReact
+      src="/Developer.lottie"
+      loop
+      autoplay
+
+      className="object-cover w-full h-full"
+    />
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: 50 }}

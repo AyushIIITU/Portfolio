@@ -10,25 +10,24 @@ export function Footer() {
   
   const socialLinks = [
     { icon: <Github className="h-5 w-5" />, href: "https://github.com/AyushIIITU", label: "GitHub" },
-    { icon: <Linkedin className="h-5 w-5" />, href: "https://linkedin.com", label: "LinkedIn" },
-    // { icon: <Twitter className="h-5 w-5" />, href: "https://twitter.com", label: "Twitter" },
+    { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/ayush-ba444b257", label: "LinkedIn" },
     { icon: <Mail className="h-5 w-5" />, href: "mailto:ayush01122004@gmail.com", label: "Email" }
   ];
   
   return (
-    <footer className="border-t bg-muted/50 py-12">
-      <div className="container">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+    <footer className="w-full border-t bg-muted/50 py-12">
+      <div className="w-full px-4">
+        <div className="flex flex-col items-center justify-between gap-6 w-full">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center gap-2 md:items-start"
+            className="flex flex-col items-center gap-2 w-full"
           >
             <Link href="/" className="text-xl font-bold">
-              DevPortfolio
+              Portfolio
             </Link>
-            <p className="text-center text-sm text-muted-foreground md:text-left">
+            <p className="text-center text-sm text-muted-foreground">
               Building exceptional digital experiences with code.
             </p>
           </motion.div>
@@ -37,7 +36,7 @@ export function Footer() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center gap-4 md:items-end"
+            className="flex flex-col items-center gap-4 w-full"
           >
             <div className="flex gap-2">
               {socialLinks.map((link, index) => (

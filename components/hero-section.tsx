@@ -68,7 +68,7 @@ export function HeroSection() {
               </Link>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <Link href="https://www.linkedin.com/in/ayush-ba444b257" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>

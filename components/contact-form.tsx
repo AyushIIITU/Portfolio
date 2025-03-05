@@ -65,12 +65,12 @@ export function ContactForm() {
     setIsSubmitting(false);
   }
 
-  const formFields = [
-    { name: "name", label: "Name", placeholder: "Your name", type: "input" },
-    { name: "email", label: "Email", placeholder: "your.email@example.com", type: "input" },
-    { name: "subject", label: "Subject", placeholder: "What is this regarding?", type: "input" },
-    { name: "message", label: "Message", placeholder: "Your message here...", type: "textarea" }
-  ];
+  // const formFields = [
+  //   { name: "name", label: "Name", placeholder: "Your name", type: "input" },
+  //   { name: "email", label: "Email", placeholder: "your.email@example.com", type: "input" },
+  //   { name: "subject", label: "Subject", placeholder: "What is this regarding?", type: "input" },
+  //   { name: "message", label: "Message", placeholder: "Your message here...", type: "textarea" }
+  // ];
 
   return (
     <Form {...form}>

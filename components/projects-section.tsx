@@ -12,63 +12,63 @@ import { motion, useInView } from "framer-motion";
 const projects = [
   {
     id: 1,
-    title: "CAmpus Management System",
-    description: "A full-featured management platform with complient and application management, laundary management, bus booking management and task assignment menagement.",
-    image: "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?q=80&w=2070&auto=format&fit=crop",
-    tags: ["React", "Node.js", "Bootstrap"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-    category: "web",
+    title: "Campus Management System",
+    description: "A comprehensive campus management platform streamlining administrative tasks and enhancing student experience. Features include compliant and application management, laundry service tracking, bus booking, and task assignment, all integrated into a user-friendly interface.",
+    image: "/IIIT-UNA.png",
+    tags: ["React js", "Node js", "Bootstrap","MongoDB"],
+    liveUrl: "https://www.youtube.com/watch?v=ZEZ7gy2EYAk",
+    githubUrl: "https://github.com/AyushIIITU/Campus-Management-System",
+    category: ["web",],
   },
   {
     id: 2,
-    title: "Productivity Management App",
-    description: "A collaborative productivty management application with real-time study timer, profile sharing and daily entery.",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
-    tags: ["React", "tailwind css", "nodejs","BERT","Python","tenserflow"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-    category: "web",
+    title: "Productivity Management App (Daily-Do)",
+    description: "Daily-Do is a collaborative productivity application designed to boost focus and efficiency. It incorporates a real-time study timer, profile sharing for peer support, and a daily entry system for tracking progress. Leveraging AI with BERT and TensorFlow for enhanced analytics and user insights.",
+    image: "/dailydo.png",
+    tags: ["React js", "Tailwind CSS", "Node js", "BERT", "Python", "Tenserflow"],
+    liveUrl: "https://www.youtube.com/watch?v=MlHh5dJS2BE",
+    githubUrl: "https://github.com/AyushIIITU/Daily-Done",
+    category: ["web",],
   },
   {
     id: 3,
-    title: "Virtual Card Sharing",
-    description: "A virtual card sharing website were user can createa virtual card like greeting,wishing and enagment card and share over diffrent platform.",
-    image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=2070&auto=format&fit=crop",
-    tags: ["JavaScript", "Gemini API", "tailwind css", "React js","Node  js"],
+    title: "Virtual Card Sharing Platform (MetaCard)",
+    description: "MetaCard allows users to create and share personalized virtual cards for greetings, wishes, and engagements. Utilizing the Gemini API for creative content generation, this platform makes digital card creation and sharing seamless across various platforms.",
+    image: "/metacard.png",
+    tags: ["JavaScript", "Gemini API", "Tailwind CSS", "React js", "Node js"],
     liveUrl: "https://metacard.me",
-    githubUrl: "https://github.com",
-    category: "web",
+    githubUrl: "https://github.com/AyushIIITU/Meta-Cards",
+    category: ["web",],
   },
   {
     id: 4,
-    title: "Automatic RoadDamege Detection Mobile App",
-    description: "A mobile application for tracking roaddamege,reporing roaddameg and alert",
-    image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=2070&auto=format&fit=crop",
-    tags: ["React Native", "Expo", "python", "yolo","web-socket"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-    category: "mobile",
+    title: "Automated Road Damage Detection Mobile App (RoadSense)",
+    description: "RoadSense is a mobile application developed to automate road damage detection and reporting. Using React Native and Expo, coupled with YOLO-based image processing and WebSocket integration, it provides real-time tracking, reporting, and alerts for road maintenance.",
+    image: "/roadDamage.png",
+    tags: ["React Native", "Expo", "Python", "Yolo", "Web-Socket","MongoDB"],
+    liveUrl: "https://drive.google.com/file/d/1JuoTKgZAW7sPpliZe74aSjkN_ZpjibFX/view?resourcekey",
+    githubUrl: "https://github.com/AyushIIITU/RoadSafty",
+    category: ["mobile",],
   },
   {
     id: 5,
-    title: "AI ChatBot on Youtube Video and PDF",
-    description: "An AI-powered application that generates content based on user provide link of youtube or pdf and it can generate mcq based on provide link.",
-    image: "https://images.unsplash.com/photo-1677442135136-760c813028c0?q=80&w=2070&auto=format&fit=crop",
-    tags: ["Python", "Ollama", "LangChain", "Flutter"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-    category: "ai",
+    title: "AI Content Generation & MCQ Platform (GeinAi)",
+    description: "GeinAi is an AI-powered application that extracts and generates content from YouTube videos and PDFs. It goes further by creating multiple-choice questions based on the provided content, enhancing learning and content engagement. Powered by Python, Ollama, LangChain, and a Flutter frontend.",
+    image: "/chatbot.webp",
+    tags: ["Python", "Ollama", "LangChain", "Flutter","SQLlite"],
+    // liveUrl: "https://example.com",
+    githubUrl: "https://github.com/AyushIIITU/IIITU-Hackathon-Backend",
+    category: ["ai","mobile"],
   },
   {
     id: 6,
-    title: "E-Comerce Website for Visually imapared people",
-    description: "An intrative website in which the website guide the user and a keyboard which produce key sound on every key pressed",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    tags: ["D3.js", "React", "Node.js", "MongoDB"],
-    liveUrl: "https://example.com",
+    title: "Accessible E-Commerce Website (BlindKart)",
+    description: "BlindKart is an e-commerce platform designed with accessibility in mind for visually impaired users. It features an interactive interface with auditory feedback for keyboard interactions and guided navigation, ensuring a seamless shopping experience. Built with Javascript, Node.js,CSS,HTML and MySQL.",
+    image: "/blindkart.png",
+    tags: [ "Javascript", "Node.js","CSS","HTML", "MySQL"],
+    liveUrl: "http://blind-kart2.s3-website.ap-south-1.amazonaws.com/",
     githubUrl: "https://github.com",
-    category: "data",
+    category: ["data",],
   },
 ];
 
@@ -79,7 +79,7 @@ export function ProjectsSection() {
 
   const filteredProjects = activeTab === "all" 
     ? projects 
-    : projects.filter(project => project.category === activeTab);
+    : projects.filter(project => project.category.some(category => category === activeTab));
 
     const containerVariants = {
       hidden: { opacity: 0 },
@@ -221,7 +221,7 @@ interface Project {
           image: string;
           tags: string[];
           githubUrl: string;
-          liveUrl: string;
+          liveUrl?: string;
         }
 function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef(null);
@@ -266,11 +266,11 @@ function ProjectCard({ project }: { project: Project }) {
               <Github className="mr-2 h-4 w-4" /> Code
             </a>
           </Button>
-          <Button size="sm" asChild>
+         {project?.liveUrl && <Button size="sm" asChild>
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
             </a>
-          </Button>
+          </Button>}
         </CardFooter>
       </Card>
     </motion.div>
