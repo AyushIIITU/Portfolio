@@ -1,17 +1,18 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import path from "path";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 const transporter = nodemailer.createTransport({
   host: process.env.MAILTRAP_HOST,
-  port: process.env.MAILTRAP_PORT,
+  port: Number(process.env.MAILTRAP_PORT),
   auth: {
     user: process.env.MAILTRAP_USER,
     pass: process.env.MAILTRAP_PASS,
   },
-});
+} as SMTPTransport.Options);
 
 const mockOrder = {
   _id: "6789abcdef",
