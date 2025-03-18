@@ -7,6 +7,8 @@ import { Navbar } from "@/components/navbar";
 import { ProjectsSection } from "@/components/projects-section";
 import { SkillsSection } from "@/components/skills-section";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Chatbot } from "@/components/chatbot";
+import Chat from '@/components/Chat';
 
 export default function Home() {
   return (
@@ -20,7 +22,13 @@ export default function Home() {
       <SkillsSection />
       <ContactSection />
       <Footer />
-    
+      <Chatbot />
+      <section className="w-full py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">Ask Me Anything</h2>
+          <Chat />
+        </div>
+      </section>
     </div>
     </ThemeProvider>
   );

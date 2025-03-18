@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
+  experimental: { serverComponentsExternalPackages: ['faiss-node'] },
 };
 
 export default nextConfig;
