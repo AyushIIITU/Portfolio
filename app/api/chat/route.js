@@ -7,8 +7,6 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { HuggingFaceTransformersEmbeddings } from "@langchain/community/embeddings/huggingface_transformers";
 import { FaissStore } from "@langchain/community/vectorstores/faiss";
 import { OpenAI } from "openai";
-import fs from "fs";
-import path from "path";
 
 // Properly type the OpenAI client
 const openai = new OpenAI({
@@ -20,58 +18,15 @@ const embeddingModel = new HuggingFaceTransformersEmbeddings({
   model: "Xenova/all-MiniLM-L6-v2",
 });
 
-const faissIndexPath = path.join(process.cwd(), "faiss_index"); // Directory for FAISS index
-let vectorStore;
-const loadAndIndexDocs = async () => {
-  if (fs.existsSync(path.join(faissIndexPath, "faiss.index")) &&
-      fs.existsSync(path.join(faissIndexPath, "docstore.json"))) {
-    console.log("Loading FAISS index from saved files...");
+// Initialize vectorStore as a global variable
+let vectorStore = null;
 
-    // Correct way to load FAISS
-    vectorStore = await FaissStore.load(
-      faissIndexPath, 
-      embeddingModel, 
-      { docstorePath: path.join(faissIndexPath, "docstore.json") } // Explicitly specify docstore
-    );
-
-    console.log("FAISS index successfully loaded.");
-  } else {
-    console.log("No FAISS index found. Scraping website and creating index...");
-
-    // Scrape and process data
-    const cheerioLoader = new CheerioWebBaseLoader(
-      "https://portfolio-ayushiiitus-projects.vercel.app/"
-    );
-    const docs = await cheerioLoader.load();
-    const splitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1000,
-      chunkOverlap: 200,
-    });
-    const allSplits = await splitter.splitDocuments(docs);
-
-    vectorStore = new FaissStore(embeddingModel, {});
-    await vectorStore.addDocuments(allSplits);
-
-    // Ensure the directory exists
-    if (!fs.existsSync(faissIndexPath)) {
-      fs.mkdirSync(faissIndexPath, { recursive: true });
-    }
-
-    // Save FAISS index and metadata
-    await vectorStore.save(faissIndexPath);
-    
-    console.log("FAISS index successfully created and saved.");
-  }
-};
-await loadAndIndexDocs();
 // Define state types properly
 const StateAnnotation = Annotation.Root({
   question: Annotation,
   context: Annotation,
   answer: Annotation,
 });
-
-
 
 const retrieve = async (state) => {
   const retrievedDocs = await vectorStore.similaritySearch(state.question);
@@ -107,8 +62,23 @@ const graph = new StateGraph(StateAnnotation)
   .addEdge("generate", "__end__")
   .compile();
 
-// // Initialize vectorStore before usage
-// await loadAndIndexDocs();
+// Initialize vectorStore if not already initialized
+const initializeVectorStore = async () => {
+  if (!vectorStore) {
+    const cheerioLoader = new CheerioWebBaseLoader(
+      "https://portfolio-ayushiiitus-projects.vercel.app/"
+    );
+    const docs = await cheerioLoader.load();
+    const splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 1000,
+      chunkOverlap: 200,
+    });
+    const allSplits = await splitter.splitDocuments(docs);
+
+    vectorStore = new FaissStore(embeddingModel, {});
+    await vectorStore.addDocuments(allSplits);
+  }
+};
 
 export async function POST(req) {
   try {
@@ -122,7 +92,9 @@ export async function POST(req) {
       );
     }
 
-    // Add null check for vectorStore
+    // Initialize vectorStore if needed
+    await initializeVectorStore();
+
     if (!vectorStore) {
       return NextResponse.json(
         { error: 'Chat system not initialized properly' },
