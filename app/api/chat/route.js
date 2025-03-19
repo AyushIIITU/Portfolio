@@ -8,6 +8,9 @@ import { HuggingFaceTransformersEmbeddings } from "@langchain/community/embeddin
 import { FaissStore } from "@langchain/community/vectorstores/faiss";
 import { OpenAI } from "openai";
 
+// Configure route to be dynamic
+export const dynamic = 'force-dynamic';
+
 // Properly type the OpenAI client
 const openai = new OpenAI({
   baseURL: 'https://api.studio.nebius.com/v1/',
