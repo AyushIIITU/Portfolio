@@ -104,7 +104,7 @@ export async function POST(req) {
 
     const result = await graph.invoke({ question });
     return NextResponse.json({ answer: result.answer });
-  } catch (error) { // Type error as any to access message property safely
+  } catch (error) {
     console.error('Error in chat API:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
@@ -112,4 +112,24 @@ export async function POST(req) {
       { status: 500 }
     );
   }
+}
+
+// Add handler for GET requests
+export async function GET() {
+  return NextResponse.json(
+    { error: 'Method not allowed. Please use POST.' },
+    { status: 405 }
+  );
+}
+
+// Add OPTIONS handler for CORS
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
 }
