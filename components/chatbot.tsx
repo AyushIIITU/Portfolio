@@ -45,7 +45,7 @@ export function Chatbot() {
 
     try {
       // Call the API route instead of direct function
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://chat.metacard.me/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
