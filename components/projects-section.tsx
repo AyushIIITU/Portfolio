@@ -11,16 +11,6 @@ import { motion, useInView } from "framer-motion";
 
 const projects = [
   {
-    id: 1,
-    title: "Campus Management System",
-    description: "A comprehensive campus management platform streamlining administrative tasks and enhancing student experience. Features include compliant and application management, laundry service tracking, bus booking, and task assignment, all integrated into a user-friendly interface.",
-    image: "/IIIT-UNA.png",
-    tags: ["React js", "Node js", "Bootstrap","MongoDB"],
-    liveUrl: "https://www.youtube.com/watch?v=ZEZ7gy2EYAk",
-    githubUrl: "https://github.com/AyushIIITU/Campus-Management-System",
-    category: ["web",],
-  },
-  {
     id: 2,
     title: "Productivity Management App (Daily-Do)",
     description: "Daily-Do is a collaborative productivity application designed to boost focus and efficiency. It incorporates a real-time study timer, profile sharing for peer support, and a daily entry system for tracking progress. Leveraging AI with BERT and TensorFlow for enhanced analytics and user insights.",
@@ -51,6 +41,16 @@ const projects = [
     category: ["mobile","ai"],
   },
   {
+    id: 7,
+    title: "AI-Powered Coustom Chatbot (Portfolio Chatbot)",
+    description: "This project is a custom chatbot integrated into my portfolio website, designed to assist users in navigating the site and answering queries. It utilizes the OpenAI API for natural language processing and LangChain for efficient data handling. The chatbot is built with Node.js and employs FAISS for fast similarity search, ensuring quick and relevant responses.",
+    image: "/coustomChatbot.png",
+    tags: ["Node.js", "OpenAI API","LangChain", "LangGraph","FAISS"],
+    liveUrl: "https://portfolio-ayushiiitus-projects.vercel.app/?open=true",  
+    githubUrl:"https://github.com/AyushIIITU/Portfolio-ChatBot",
+    category: ["web","ai"],
+  },
+  {
     id: 5,
     title: "AI Content Generation & MCQ Platform (GeinAi)",
     description: "GeinAi is an AI-powered application that extracts and generates content from YouTube videos and PDFs. It goes further by creating multiple-choice questions based on the provided content, enhancing learning and content engagement. Powered by Python, Ollama, LangChain, and a Flutter frontend.",
@@ -61,14 +61,14 @@ const projects = [
     category: ["ai","mobile"],
   },
   {
-    id: 7,
-    title: "AI-Powered Coustom Chatbot (Portfolio Chatbot)",
-    description: "This project is a custom chatbot integrated into my portfolio website, designed to assist users in navigating the site and answering queries. It utilizes the OpenAI API for natural language processing and LangChain for efficient data handling. The chatbot is built with Node.js and employs FAISS for fast similarity search, ensuring quick and relevant responses.",
-    image: "/coustomChatbot.png",
-    tags: ["Node.js", "OpenAI API","LangChain", "LangGraph","FAISS"],
-    liveUrl: "https://portfolio-ayushiiitus-projects.vercel.app/",  
-    githubUrl:"https://github.com/AyushIIITU/Portfolio-ChatBot",
-    category: ["web","ai"],
+    id: 1,
+    title: "Campus Management System",
+    description: "A comprehensive campus management platform streamlining administrative tasks and enhancing student experience. Features include compliant and application management, laundry service tracking, bus booking, and task assignment, all integrated into a user-friendly interface.",
+    image: "/IIIT-UNA.png",
+    tags: ["React js", "Node js", "Bootstrap","MongoDB"],
+    liveUrl: "https://www.youtube.com/watch?v=ZEZ7gy2EYAk",
+    githubUrl: "https://github.com/AyushIIITU/Campus-Management-System",
+    category: ["web",],
   },
   {
     id: 6,
@@ -77,8 +77,8 @@ const projects = [
     image: "/blindkart.png",
     tags: [ "Javascript", "Node.js","CSS","HTML", "MySQL"],
     liveUrl: "http://blind-kart2.s3-website.ap-south-1.amazonaws.com/",
-    githubUrl: "https://github.com",
-    category: ["data",],
+    githubUrl: "https://github.com/AyushIIITU/BlindKart-Project",
+    category: ["web",],
   },
 ];
 
