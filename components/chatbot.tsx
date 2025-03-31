@@ -3,21 +3,29 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Loader2, Send, X, MessageSquare } from "lucide-react";
-
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 type Message = {
   role: "user" | "assistant";
   content: string;
 };
 
-export function Chatbot() {
-  const [isOpen, setIsOpen] = useState(false);
+export function Chatbot({ open = false }: { open: boolean }) {
+  const [isOpen, setIsOpen] = useState(open);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi there! I'm your portfolio assistant. How can I help you with information about this portfolio?",
+      content:
+        "Hi there! I'm your portfolio assistant. How can I help you with information about this portfolio?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -45,18 +53,18 @@ export function Chatbot() {
 
     try {
       // Call the API route instead of direct function
-      const response = await fetch('https://chat.metacard.me/ask', {
-        method: 'POST',
+      const response = await fetch("https://chat.metacard.me/ask", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ question: input }),
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to get response');
+        throw new Error(data.error || "Failed to get response");
       }
 
       // Add assistant message to the chat
@@ -66,7 +74,7 @@ export function Chatbot() {
       ]);
     } catch (error) {
       console.error("Error querying chatbot:", error);
-      
+
       // Add error message
       setMessages((prev) => [
         ...prev,
@@ -106,7 +114,9 @@ export function Chatbot() {
       {isOpen && (
         <Card className="fixed bottom-4 right-4 w-80 md:w-96 h-96 z-50 shadow-lg flex flex-col">
           <CardHeader className="p-3 flex flex-row items-center justify-between space-y-0">
-            <CardTitle className="text-md font-medium">Portfolio Assistant</CardTitle>
+            <CardTitle className="text-md font-medium">
+              Portfolio Assistant
+            </CardTitle>
             <Button
               variant="ghost"
               className="h-8 w-8 p-0 rounded-full"
@@ -115,7 +125,7 @@ export function Chatbot() {
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
-          
+
           <ScrollArea className="flex-1 px-3">
             <CardContent className="space-y-4">
               {messages.map((message, index) => (
@@ -132,7 +142,9 @@ export function Chatbot() {
                         : "bg-muted"
                     }`}
                   >
-                    <p className="text-sm">{message.content}</p>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {message.content}
+                    </ReactMarkdown>
                   </div>
                 </div>
               ))}
@@ -146,7 +158,7 @@ export function Chatbot() {
               <div ref={messagesEndRef} />
             </CardContent>
           </ScrollArea>
-          
+
           <CardFooter className="p-3 pt-0">
             <div className="flex w-full space-x-2">
               <Input
@@ -157,8 +169,8 @@ export function Chatbot() {
                 disabled={isLoading}
                 className="flex-1"
               />
-              <Button 
-                size="icon" 
+              <Button
+                size="icon"
                 onClick={handleSendMessage}
                 disabled={isLoading || !input.trim()}
               >

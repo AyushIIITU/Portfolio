@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden py-20 md:py-32">
-      <div className="container flex flex-col items-center justify-between gap-12 md:flex-row">
+      <div className="container sm:px-0 px-1 flex flex-col items-center justify-between gap-12 md:flex-row">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
