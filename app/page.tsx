@@ -10,13 +10,10 @@ import { ProjectsSection } from "@/components/projects-section";
 import { SkillsSection } from "@/components/skills-section";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Chatbot } from "@/components/chatbot";
-import { useSearchParams } from "next/navigation";
-// import Chat from '@/components/Chat';
+import { Suspense } from 'react';
+import ChatbotWrapper from '@/components/ChatbotWrapper';
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const chatOpen = searchParams.get('open') === 'true';
-
   return (
     <ThemeProvider attribute="class">
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -28,7 +25,11 @@ export default function Home() {
         <SkillsSection />
         <ContactSection />
         <Footer />
-        <Chatbot open={chatOpen} />
+        <Suspense fallback={<div>Loading Chatbot...</div>}>
+          <ChatbotWrapper>
+            {(chatOpen:boolean) => <Chatbot open={chatOpen} />}
+          </ChatbotWrapper>
+        </Suspense>
       </div>
     </ThemeProvider>
   );
