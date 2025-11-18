@@ -1,0 +1,138 @@
+[
+  [
+    [
+      "926d4cc9-cd3d-4d79-866b-e41de41effed",
+      {
+        "pageContent": "Hi, I'm Ayush College Student I'm a dedicated and ambitious college student, passionate about learning and growing in my field. Contact Me View Projects GitHub LinkedIn Email About Me My Journey As a college student passionate about technology, I've immersed myself in the world of web development and artificial intelligence. My journey began with the MERN stack, where I honed my skills in building dynamic and responsive web applications. In addition to web development, I have a strong interest",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "d40f5430-a637-4947-88e1-064abc9dcb21",
+      {
+        "pageContent": "to web development, I have a strong interest in Python and Go, which I use for backend development and data analysis. My exploration into AI has led me to work with TensorFlow and Generative AI, where I enjoy creating innovative solutions and exploring the potential of machine learning. Outside of academics, I enjoy participating in hackathons, contributing to innovative projects, and staying updated with the latest tech trends. In my free time, I love playing chess, exploring new music, and",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "4f317e05-f1a7-40d6-bc13-f3215ec65969",
+      {
+        "pageContent": "I love playing chess, exploring new music, and reading books. Download Resume Work Experience My professional journey and career highlights May 2025 - Present AI Intern Cinemachines Remote — BlinkAdz Remote Engineered AI-based advertisements and developed advanced chatbot systems with robust deployment pipelines. Show More Apr 2024 - May 2025 Backend Lead Indian Indtitue of Information and Tecnology Hybrid Assisted in developing backend,admin panel and faculty panel, focusing on back-end",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "9ce71f87-68e2-496e-acb6-088a12ff3fa9",
+      {
+        "pageContent": "panel and faculty panel, focusing on back-end development and admin panel interfaces. Show More My Projects A showcase of my recent work and side projects All Web Mobile AI Productivity Management App (Daily-Do) Daily-Do is a collaborative productivity application designed to boost focus and efficiency. It incorporates a real-time study timer, profile sharing for peer support, and a daily entry system for tracking progress. Leveraging AI with BERT and TensorFlow for enhanced analytics and user",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "4eb0828d-f744-4e12-89b0-1d28df841f71",
+      {
+        "pageContent": "and TensorFlow for enhanced analytics and user insights. React js Tailwind CSS Node js BERT Python Tenserflow Code Live Demo Virtual Card Sharing Platform (MetaCard) MetaCard allows users to create and share personalized virtual cards for greetings, wishes, and engagements. Utilizing the Gemini API for creative content generation, this platform makes digital card creation and sharing seamless across various platforms. JavaScript Gemini API Tailwind CSS React js Node js Code Live Demo Automated",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "81e62d07-4e9b-470b-a5e2-571ba8167ce7",
+      {
+        "pageContent": "CSS React js Node js Code Live Demo Automated Road Damage Detection Mobile App (RoadSense) RoadSense is a mobile application developed to automate road damage detection and reporting. Using React Native and Expo, coupled with YOLO-based image processing and WebSocket integration, it provides real-time tracking, reporting, and alerts for road maintenance. React Native Expo Python Yolo Web-Socket MongoDB Code Live Demo AI-Powered Coustom Chatbot (Portfolio Chatbot) This project is a custom",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "a3628686-f1f5-4c0f-91ec-c34b70682dd4",
+      {
+        "pageContent": "(Portfolio Chatbot) This project is a custom chatbot integrated into my portfolio website, designed to assist users in navigating the site and answering queries. It utilizes the OpenAI API for natural language processing and LangChain for efficient data handling. The chatbot is built with Node.js and employs FAISS for fast similarity search, ensuring quick and relevant responses. Node.js OpenAI API LangChain LangGraph FAISS Code Live Demo AI Content Generation & MCQ Platform (GeinAi) GeinAi is",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "65488bd7-62a4-41cc-9231-b40b118e7c12",
+      {
+        "pageContent": "Generation & MCQ Platform (GeinAi) GeinAi is an AI-powered application that extracts and generates content from YouTube videos and PDFs. It goes further by creating multiple-choice questions based on the provided content, enhancing learning and content engagement. Powered by Python, Ollama, LangChain, and a Flutter frontend. Python Ollama LangChain Flutter SQLlite Code Live Demo Campus Management System A comprehensive campus management platform streamlining administrative tasks and enhancing",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "bfb39515-37bf-4d74-8592-4f637ef31899",
+      {
+        "pageContent": "streamlining administrative tasks and enhancing student experience. Features include compliant and application management, laundry service tracking, bus booking, and task assignment, all integrated into a user-friendly interface. React js Node js Bootstrap MongoDB Code Live Demo Accessible E-Commerce Website (BlindKart) BlindKart is an e-commerce platform designed with accessibility in mind for visually impaired users. It features an interactive interface with auditory feedback for keyboard",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "bf7d96d3-5d4b-422d-8d90-02958c9ce301",
+      {
+        "pageContent": "interface with auditory feedback for keyboard interactions and guided navigation, ensuring a seamless shopping experience. Built with Javascript, Node.js,CSS,HTML and MySQL. Javascript Node.js CSS HTML MySQL Code Live Demo Skills & Expertise Technologies and tools I work with Frontend HTML5 CSS3 JavaScript TypeScript React Next.js Tailwind CSS Material UI Redux Backend Node.js Express NestJS Python GraphQL REST API Go Lang Database MongoDB PostgreSQL MySQL Redis DevOps Git GitHub Actions Docker",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "d45796d8-818e-49bc-b7df-2ebf9d9a6577",
+      {
+        "pageContent": "MySQL Redis DevOps Git GitHub Actions Docker AWS Vercel Mobile React Native Expo Android iOS Testing Jest React Testing Library Languages JavaScript TypeScript Python C++ Go Lang Other UI/UX Design Performance Optimization WebSockets WebRTC Get In Touch Have a project in mind? Let's work together! Email ayush01122004@gmail.com Phone +91 7352677279 Send Me a Message Name Email Subject Message Send Message Building exceptional digital experiences with code. GitHub LinkedIn Email © 2025 Ayush. All",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ],
+    [
+      "38a64a3e-86cd-49be-afa7-fa201710bcbd",
+      {
+        "pageContent": "code. GitHub LinkedIn Email © 2025 Ayush. All rights reserved. Portfolio Assistant Hi there! I'm your portfolio assistant. How can I help you with information about this portfolio?",
+        "metadata": {
+          "source": "https://portfolio-ayushiiitus-projects.vercel.app",
+          "loc": { "lines": { "from": 1, "to": 1 } }
+        }
+      }
+    ]
+  ],
+  {
+    "0": "926d4cc9-cd3d-4d79-866b-e41de41effed",
+    "1": "d40f5430-a637-4947-88e1-064abc9dcb21",
+    "2": "4f317e05-f1a7-40d6-bc13-f3215ec65969",
+    "3": "9ce71f87-68e2-496e-acb6-088a12ff3fa9",
+    "4": "4eb0828d-f744-4e12-89b0-1d28df841f71",
+    "5": "81e62d07-4e9b-470b-a5e2-571ba8167ce7",
+    "6": "a3628686-f1f5-4c0f-91ec-c34b70682dd4",
+    "7": "65488bd7-62a4-41cc-9231-b40b118e7c12",
+    "8": "bfb39515-37bf-4d74-8592-4f637ef31899",
+    "9": "bf7d96d3-5d4b-422d-8d90-02958c9ce301",
+    "10": "d45796d8-818e-49bc-b7df-2ebf9d9a6577",
+    "11": "38a64a3e-86cd-49be-afa7-fa201710bcbd"
+  }
+]

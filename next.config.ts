@@ -6,9 +6,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
-  experimental: { 
-    serverComponentsExternalPackages: ['faiss-node'],
-  },
+  serverExternalPackages: ['faiss-node'],
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Don't resolve 'fs' module on the client to prevent this error
