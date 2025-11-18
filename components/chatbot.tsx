@@ -73,6 +73,28 @@ export function Chatbot({ open }: { open: boolean }) {
     scrollToBottom();
   }, [messages]);
 
+  // Prevent body scroll on mobile when chatbot is open
+  useEffect(() => {
+    if (isOpen && typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 640; // sm breakpoint
+      if (isMobile) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+      }
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [isOpen]);
+
   // Function to handle sending a message
   const handleSendMessage = async () => {
     if (!input.trim()) return;
@@ -144,8 +166,8 @@ export function Chatbot({ open }: { open: boolean }) {
 
       {/* Chat window */}
       {isOpen && (
-        <Card className="fixed bottom-4 right-4 w-80 md:w-96 h-96 z-50 shadow-lg flex flex-col">
-          <CardHeader className="p-3 flex flex-row items-center justify-between space-y-0">
+        <Card className="fixed bottom-0 right-0 left-0 sm:bottom-4 sm:right-4 sm:left-auto w-full sm:w-96 h-[100dvh] sm:h-96 z-50 shadow-lg flex flex-col sm:rounded-lg rounded-none">
+          <CardHeader className="p-3 flex flex-row items-center justify-between space-y-0 border-b">
             <CardTitle className="text-md font-medium">
               Portfolio Assistant
             </CardTitle>
