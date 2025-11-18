@@ -19,8 +19,17 @@ type Message = {
   content: string;
 };
 
-export function Chatbot({ open = false }: { open: boolean }) {
-  const [isOpen, setIsOpen] = useState(open);
+export function Chatbot({ open }: { open: boolean }) {
+  const [isOpen, setIsOpen] = useState(() => {
+    // Check sessionStorage on initial load
+    if (typeof window !== 'undefined') {
+      const sessionClosed = sessionStorage.getItem('chatbot-closed');
+      if (sessionClosed === 'true') {
+        return false;
+      }
+    }
+    return true;
+  });
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -31,6 +40,29 @@ export function Chatbot({ open = false }: { open: boolean }) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Update isOpen when open prop changes (e.g., from URL parameter)
+  useEffect(() => {
+    if (open !== undefined) {
+      setIsOpen(open);
+    }
+  }, [open]);
+
+  // Handle closing the chatbot
+  const handleClose = () => {
+    setIsOpen(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('chatbot-closed', 'true');
+    }
+  };
+
+  // Handle opening the chatbot
+  const handleOpen = () => {
+    setIsOpen(true);
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('chatbot-closed');
+    }
+  };
 
   // Function to scroll to the bottom of the messages
   const scrollToBottom = () => {
@@ -102,7 +134,7 @@ export function Chatbot({ open = false }: { open: boolean }) {
       <div className="fixed bottom-4 right-4 z-50">
         {!isOpen && (
           <Button
-            onClick={() => setIsOpen(true)}
+            onClick={handleOpen}
             className="rounded-full w-12 h-12 p-0 flex items-center justify-center shadow-lg"
           >
             <MessageSquare className="h-6 w-6" />
@@ -120,7 +152,7 @@ export function Chatbot({ open = false }: { open: boolean }) {
             <Button
               variant="ghost"
               className="h-8 w-8 p-0 rounded-full"
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
             >
               <X className="h-4 w-4" />
             </Button>

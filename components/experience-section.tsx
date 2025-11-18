@@ -16,11 +16,26 @@ import Image from "next/image";
 const experiences = [
   {
     id: 1,
+    role: "AI Intern",
+    company: "Cinemachines Remote — BlinkAdz",
+    logo:"https://cinemachines.com/logo.png",
+    location: "Remote",
+    period: "May 2025 - Present",
+    description: "Engineered AI-based advertisements and developed advanced chatbot systems with robust deployment pipelines.",
+    achievements: [
+      "Engineered AI-based advertisements using dynamic templates for optimized content delivery",
+      "Developed a multi-threaded chatbot with RAG and multi-agent systems for domain-specific replies",
+      "Built a robust CI/CD pipeline with Docker to automate deployment and ensure scalable, reliable AI service delivery"
+    ],
+    skills: ["AI/ML", "RAG", "Multi-Agent Systems", "Docker", "CI/CD", "Python", "Chatbot Development"]
+  },
+  {
+    id: 2,
     role: "Backend Lead",
     company: "Indian Indtitue of Information and Tecnology",
     logo:"https://iiitu.ac.in/Indian_Institute_of_Information_Technology,_Una_logo.png",
     location: "Hybrid",
-    period: "Apr 2024 - Present",
+    period: "Apr 2024 - May 2025",
     description: "Assisted in developing backend,admin panel and faculty panel, focusing on back-end development and admin panel interfaces.",
     achievements: [
       "Collaborated and led a team to implement a new feature that improved response time and security",
@@ -29,34 +44,8 @@ const experiences = [
     ],
     skills: ["React", "TailWind","Nodejs","JavaScript", "CSS", "Git", "Agile"]
   }
-  // {
-  //   id: 2,
-  //   role: "Research Assistant",
-  //   company: "University of Example",
-  //   location: "City, State",
-  //   period: "Sep 2022 - May 2023",
-  //   description: "Conducted research on machine learning algorithms and their applications in data analysis.",
-  //   achievements: [
-  //     "Co-authored a paper published in a peer-reviewed journal",
-  //     "Developed a Python script to automate data collection and analysis",
-  //     "Presented research findings at a university symposium"
-  //   ],
-  //   skills: ["Python", "Machine Learning", "Data Analysis", "Research"]
-  // },
-  // {
-  //   id: 3,
-  //   role: "Volunteer Web Developer",
-  //   company: "Non-Profit Organization",
-  //   location: "City, State",
-  //   period: "Jan 2022 - Aug 2022",
-  //   description: "Volunteered to develop and maintain the organization's website, ensuring it was user-friendly and up-to-date.",
-  //   achievements: [
-  //     "Redesigned the website, improving navigation and user experience",
-  //     "Implemented a content management system to streamline updates",
-  //     "Increased website traffic by 30% through SEO improvements"
-  //   ],
-  //   skills: ["HTML", "CSS", "WordPress", "SEO"]
-  // }
+
+
 ];
 
 export function ExperienceSection() {
@@ -145,10 +134,10 @@ function ExperienceCard({ experience, isExpanded, onToggle }: ExperienceCardProp
     <div className="flex flex-col md:flex-row">
       {/* Timeline dot and date */}
       <div className="flex flex-row items-center md:w-60 md:flex-col md:items-end md:pr-10">
-        <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-background shadow-md">
+        <div className="relative z-10 flex h-20 w-30 items-center justify-center rounded-lg bg-background shadow-md overflow-hidden p-2">
           {/* <Briefcase className="h-6 w-6 text-primary" />
            */}
-           <Image src={experience.logo} alt="logo" width={100} height={100} />
+           <Image src={experience.logo} alt="logo" width={100} height={60} className="object-contain w-full h-full" />
         </div>
         <div className="ml-4 md:ml-0 md:mt-2">
           <div className="flex items-center text-sm text-muted-foreground">
