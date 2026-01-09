@@ -16,7 +16,7 @@ import ChatbotWrapper from '@/components/ChatbotWrapper';
 export default function Home() {
   return (
     <ThemeProvider attribute="class">
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="flex flex-col items-stretch min-h-screen py-2 w-full">
         <Navbar />
         <HeroSection />
         <AboutSection />

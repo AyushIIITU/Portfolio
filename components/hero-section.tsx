@@ -85,7 +85,7 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative h-80 w-80 overflow-hidden rounded-full border-4 border-primary md:h-96 md:w-96"
+          className="relative h-56 w-56 sm:h-72 sm:w-72 md:h-96 md:w-96 mx-auto md:mx-0 overflow-hidden rounded-full border-4 border-primary"
         >
           <Image
             src="https://iiitu.ac.in/DevTeam/AYUSH%20KUMAR.jpg"
