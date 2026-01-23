@@ -18,12 +18,14 @@ export default function Home() {
     <ThemeProvider attribute="class">
       <div className="flex flex-col items-stretch min-h-screen py-2 w-full">
         <Navbar />
+        <div className="flex items-center flex-col justify-center">
         <HeroSection />
         <AboutSection />
         <ExperienceSection />
         <ProjectsSection />
         <SkillsSection />
         <ContactSection />
+        </div>
         <Footer />
         <Suspense fallback={<div>Loading Chatbot...</div>}>
           <ChatbotWrapper>
