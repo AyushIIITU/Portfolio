@@ -1,4 +1,3 @@
-
 # ⚡️ Developer Portfolio
 
 A modern, responsive personal portfolio website built with **Next.js** and **TypeScript**. This project showcases my skills, projects, and professional experience, featuring a clean UI and seamless navigation.
