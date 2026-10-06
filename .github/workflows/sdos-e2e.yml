@@ -1,0 +1,221 @@
+# SDOS AI Testing Agent. Installed by SDOS through a pull request; SDOS
+# overwrites this file on reinstall, so change it in SDOS, not here.
+#
+#   explore  (workflow_dispatch from SDOS): an agent on your own Claude/Codex
+#            credentials explores the app, writes Playwright specs and findings.
+#   replay   (deployment_status, or dispatch): runs the approved specs in
+#            e2e/sdos/ against the deployed URL. No LLM.
+#
+# Either way a deterministic script replays specs on target and baseline and
+# classifies every failure; SDOS downloads the artifact. Nothing here writes
+# to GitHub: issues and PRs are filed by SDOS after a human approves them.
+name: sdos-e2e
+# workflow_dispatch returns no run id; SDOS finds manual runs by this name.
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('sdos-{0}', inputs.sdos_run_id) || format('sdos-deploy-{0}', github.event.deployment.sha) }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      sdos_run_id:
+        description: "SDOS run id (correlation)"
+        required: true
+      mode:
+        description: "explore = agent writes specs; replay = run e2e/sdos specs only"
+        required: true
+        default: explore
+        type: choice
+        options: [explore, replay]
+      provider:
+        description: "Agent provider (explore only)"
+        required: true
+        default: claude
+        type: choice
+        options: [claude, codex_api_key, codex_chatgpt]
+      target_url:
+        description: "URL under test"
+        required: true
+      baseline_url:
+        description: "Stable baseline (usually prod). Empty = no differential leg."
+        required: false
+        default: ""
+      task:
+        description: "What to test"
+        required: false
+        default: "test end to end"
+      bundle_url:
+        description: "Pre-signed URL of the SDOS story bundle (JSON)"
+        required: false
+        default: ""
+      stories:
+        description: 'Inline stories JSON for manual runs when bundle_url is empty: [{"id","title","acceptanceCriteria"}]'
+        required: false
+        default: "[]"
+      extra_origins:
+        description: "Semicolon-separated extra origins the browser may load (e.g. an SSO host)"
+        required: false
+        default: ""
+  deployment_status:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Codex ChatGPT auth rotates its refresh token: two concurrent runs would race it.
+  group: sdos-e2e-${{ inputs.provider == 'codex_chatgpt' && 'codex-chatgpt' || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  e2e:
+    # Deploys: only successful ones with a URL, and never the baseline itself.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment_status.environment_url != '' &&
+       github.event.deployment_status.environment_url != vars.SDOS_BASELINE_URL)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OUT: ${{ github.workspace }}/e2e-out
+      MODE: ${{ inputs.mode || 'replay' }}
+      TARGET_URL: ${{ inputs.target_url || github.event.deployment_status.environment_url }}
+      # SDOS only sets SDOS_BASELINE_URL once someone accepted prod replays.
+      BASELINE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.baseline_url || vars.SDOS_BASELINE_URL }}
+      SPEC_DIR: ${{ github.workspace }}/${{ (inputs.mode || 'replay') == 'explore' && 'e2e-out/specs' || 'e2e/sdos' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Prepare workspace
+        env:
+          SDOS_E2E_CREDS: ${{ secrets.SDOS_E2E_CREDS }}
+          EXTRA_ORIGINS: ${{ inputs.extra_origins }}
+        run: |
+          mkdir -p "$OUT/specs" "$OUT/screenshots"
+          cp .github/sdos/playwright.config.mjs "$OUT/"
+          npm init -y --prefix "$OUT" >/dev/null
+          npm i -D --prefix "$OUT" @playwright/test@1.63.0 >/dev/null
+          "$OUT/node_modules/.bin/playwright" install --with-deps chromium
+          echo "$OUT/node_modules/.bin" >> "$GITHUB_PATH"
+          # Credentials JSON -> dotenv for Playwright MCP --secrets and the specs.
+          node -e '
+            const c = JSON.parse(process.env.SDOS_E2E_CREDS || "{}");
+            const lines = Object.entries(c).map(([k, v]) => {
+              if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(k)) throw new Error("bad credential name: " + k);
+              v = String(v);
+              // add-mask works per line; a multiline value needs every line masked.
+              v.split(/\r?\n/).filter(Boolean).forEach((l) => console.log("::add-mask::" + l));
+              // dotenv has no escape for quotes; wrap in a quote char the value lacks.
+              const q = ["\x27", "`", "\""].find((ch) => !v.includes(ch));
+              if (!q) throw new Error(k + " contains all three quote characters; cannot encode");
+              return k + "=" + q + v + q;
+            });
+            const fs = require("fs");
+            fs.writeFileSync(process.env.OUT + "/.secrets.env", lines.join("\n") + "\n", { mode: 0o600 });
+            // Names only (validated above) for the prompt; values stay in .secrets.env.
+            fs.appendFileSync(process.env.GITHUB_ENV, "SDOS_SECRET_NAMES=" + Object.keys(c).join(",") + "\n");
+          '
+          # Origins are re-serialised through URL, so nothing but an origin can
+          # reach the agent CLI arguments below.
+          node -e '
+            const origins = [process.env.TARGET_URL, ...process.env.EXTRA_ORIGINS.split(";")]
+              .filter(Boolean)
+              .map((u) => new URL(u.trim()).origin);
+            console.log("ALLOWED_ORIGINS=" + [...new Set(origins)].join(";"));
+          ' >> "$GITHUB_ENV"
+
+      - name: Fetch story bundle
+        if: env.MODE == 'explore'
+        env:
+          BUNDLE_URL: ${{ inputs.bundle_url }}
+          STORIES: ${{ inputs.stories }}
+        run: |
+          if [ -n "$BUNDLE_URL" ]; then
+            curl -fsSL --max-time 60 "$BUNDLE_URL" -o "$OUT/bundle.json"
+          else
+            node -e 'require("fs").writeFileSync(process.env.OUT + "/bundle.json", JSON.stringify({ stories: JSON.parse(process.env.STORIES || "[]") }))'
+          fi
+
+      - name: Build prompt
+        if: env.MODE == 'explore'
+        id: prompt
+        env:
+          TASK: ${{ inputs.task }}
+        run: node .github/sdos/build-prompt.mjs
+
+      - name: Agent (Claude)
+        if: env.MODE == 'explore' && inputs.provider == 'claude'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: ${{ steps.prompt.outputs.text }}
+          claude_args: |
+            --max-turns 80
+            --mcp-config '{"mcpServers":{"playwright":{"command":"npx","args":["-y","@playwright/mcp@0.0.83","--headless","--isolated","--secrets","e2e-out/.secrets.env","--output-dir","e2e-out/screenshots","--allowed-origins","${{ env.ALLOWED_ORIGINS }}"]}}}'
+            --allowedTools "mcp__playwright,Read,Write,Edit,Glob,Grep,Bash(playwright test:*)"
+
+      - name: Agent (Codex)
+        if: env.MODE == 'explore' && startsWith(inputs.provider, 'codex')
+        env:
+          # Only the selected credential is present: a ChatGPT login would
+          # silently win over an API key if both were.
+          OPENAI_API_KEY: ${{ inputs.provider == 'codex_api_key' && secrets.OPENAI_API_KEY || '' }}
+          CODEX_AUTH_JSON: ${{ inputs.provider == 'codex_chatgpt' && secrets.CODEX_AUTH_JSON || '' }}
+          CODEX_HOME: ${{ runner.temp }}/codex
+        run: |
+          npm i -g @openai/codex@0.160.0 >/dev/null
+          mkdir -p "$CODEX_HOME"
+          if [ -n "$CODEX_AUTH_JSON" ]; then
+            printf '%s' "$CODEX_AUTH_JSON" > "$CODEX_HOME/auth.json"
+            chmod 600 "$CODEX_HOME/auth.json"
+          else
+            printenv OPENAI_API_KEY | codex login --with-api-key
+          fi
+          cat > "$CODEX_HOME/config.toml" <<EOF
+          cli_auth_credentials_store = "file"
+
+          [mcp_servers.playwright]
+          command = "npx"
+          args = ["-y", "@playwright/mcp@0.0.83", "--headless", "--isolated", "--secrets", "e2e-out/.secrets.env", "--output-dir", "e2e-out/screenshots", "--allowed-origins", "$ALLOWED_ORIGINS"]
+          EOF
+          # Network on: specs replayed by the agent must reach the target URL.
+          codex exec --full-auto -c sandbox_workspace_write.network_access=true - < "$OUT/prompt.md"
+
+      - name: Seal refreshed Codex auth
+        if: always() && env.MODE == 'explore' && inputs.provider == 'codex_chatgpt'
+        env:
+          CODEX_HOME: ${{ runner.temp }}/codex
+          SDOS_SEAL_PUBKEY: ${{ vars.SDOS_SEAL_PUBKEY }}
+        run: |
+          if [ -f "$CODEX_HOME/auth.json" ]; then
+            npm i --prefix "$RUNNER_TEMP/seal" libsodium-wrappers@0.7.15 >/dev/null
+            NODE_PATH="$RUNNER_TEMP/seal/node_modules" node .github/sdos/seal.cjs seal "$CODEX_HOME/auth.json" "$OUT/codex-auth.sealed"
+          fi
+
+      - name: Differential replay
+        if: always()
+        run: node .github/sdos/classify.mjs
+
+      # Playwright traces record fill() values; scrub every credential value
+      # (and its escaped forms) before anything leaves the runner.
+      - name: Redact credentials from artifacts
+        if: always()
+        run: node .github/sdos/redact.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sdos-results-${{ inputs.sdos_run_id || github.run_id }}
+          # Explicit list: .secrets.env must never be uploaded.
+          path: |
+            e2e-out/findings.json
+            e2e-out/results.json
+            e2e-out/specs/
+            e2e-out/screenshots/
+            e2e-out/test-results/
+            e2e-out/codex-auth.sealed
+          if-no-files-found: warn
+          retention-days: 7
